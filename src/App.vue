@@ -12,20 +12,32 @@
     <h4 class="red" :style="스타일">{{ products[0] }}</h4>
     <!-- 속성을 나타낼때는 :을 명령어 앞에 붙여 :style로 만들어준다. -->
     <p>{{ price1 }} 만원</p>
+    <button v-on:click = "reportCnt += 1">허위매물신고</button> <span>신고수 : {{reportCnt}}</span>
+    <!-- 버튼을 눌렀을 때 자바스크립트처럼 이벤트를 타게 하려면 v-on:click=""을 사용한다.
+    또는 @click=""도 vue 방식으로써 역시 가능하다.
+    *** reportCnt += 1을 사용하려면 "" 안에 넣어서 "reportCnt += 1"로 하던가, 아님 reportCnt++ 로 만들어준다.
+    *** 혹은 함수(function())을 사용해서 타라WMS에서 했듯이 script 부분 아랫쪽으로 보내서 길게 코딩할 수도 있다.
+        함수를 써서 script 부분 아랫쪽에 보내서 함수 선언할 때는 함수안에 data{} 부분들을 가져가기 위해 this.을 사용해서 데이터명을 완성해준다.
+    원래 자바스크립트 방식은 onClick="" -->
   </div>
   <div>
     <h4>{{ products[1] }}</h4>
     <p>{{ price2 }} 만원</p>
+    <button v-on:click = reportCntArr[1]++>허위매물신고</button> <span>신고수 : {{reportCntArr[1]}}</span>
   </div>
   <div>
     <h4>{{ products[2] }}</h4>
     <p>{{ price2 }} 만원</p>
+    <button v-on:click = "reportCntArr[2] += 1">허위매물신고</button> <span>신고수 : {{reportCntArr[2]}}</span>
   </div>
-  <hr>
-  <div>
-    <h4 v-for="product in products" :key="product">{{ product }}</h4>
-    <p v-for="price in prices" :key="price">{{price}}만원</p>
-  </div>
+  
+
+  <!--  div 태그에 반복문을 달아 똑같이 반복 제목을 만들기
+  <hr> -->
+  <!-- <div v-for="(product, i) in products" :key="i">
+    <h4>{{ products[i] }}</h4>
+    <p>50만원</p>
+  </div> -->
 
 </template>
 
@@ -50,10 +62,16 @@ export default {
       menuBar : ['Home', 'Shop', 'About'],
       products : ['역삼동원룸', '천호동원룸', '마포구원룸'],
       prices : ['50', '60', '70'],
+      reportCnt : 0,
+      reportCntArr : [0, 0, 0],
 
     }
 
-  }
+  },
+
+  methods: {
+    
+  },
 }
 </script>
 
