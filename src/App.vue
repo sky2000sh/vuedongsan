@@ -1,4 +1,21 @@
 <template>
+  <!-- 
+    동적인 UI 만드는 법 :
+    1. UI의 현재 상태를 데이터로 저장해둔다.
+    2. 데이터에 따라 UI가 어떻게 보일지 작성한다.
+
+    v-if="조건식" => 조건식이 참일때만 HTML을 보여준다.
+  -->
+  <div class="blackBg" v-if="openModal == true">
+    <div class="whiteBg">
+      <h4>상세페이지임</h4>
+      <p>상세페이지 내용임</p>
+      <button @click="openModal = false">닫기</button>      
+    </div>
+  </div>
+
+
+
   <div class="menu">
     <!-- 반복적인 같은 태그를 효율적으로 돌리기 위해서는 v-for 반복문
     1. 원하는 태그에 v-for="작명 in 반복할횟수"
@@ -9,7 +26,9 @@
   </div>
   <div>
     원룸샵
-    <h4 class="red" :style="스타일">{{ products[0] }}</h4>
+    <hr>
+    <img src="./assets/room0.jpg" class="roomImg"/>
+    <h4 class="red" @click="openModal = true" :style="스타일">{{ products[0] }}</h4>
     <!-- 속성을 나타낼때는 :을 명령어 앞에 붙여 :style로 만들어준다. -->
     <p>{{ price1 }} 만원</p>
     <button v-on:click = "reportCnt += 1">허위매물신고</button> <span>신고수 : {{reportCnt}}</span>
@@ -21,11 +40,13 @@
     원래 자바스크립트 방식은 onClick="" -->
   </div>
   <div>
+    <img src="./assets/room1.jpg" class="roomImg"/>
     <h4>{{ products[1] }}</h4>
     <p>{{ price2 }} 만원</p>
     <button v-on:click = reportCntArr[1]++>허위매물신고</button> <span>신고수 : {{reportCntArr[1]}}</span>
   </div>
   <div>
+    <img src="./assets/room2.jpg" class="roomImg"/>
     <h4>{{ products[2] }}</h4>
     <p>{{ price2 }} 만원</p>
     <button v-on:click = "reportCntArr[2] += 1">허위매물신고</button> <span>신고수 : {{reportCntArr[2]}}</span>
@@ -54,6 +75,7 @@ export default {
   // 데이터바인딩을 사용하는 이유 : 하드코딩을 해놓으면 변경하기에 어려움 / 가변적인 데이터를 보여줄때 사용 / Vue의 실시간 자동 렌더링을 하기 위해서
   // 자료이름 : 자료내용 => object 형식
   data() {
+    // data들을 "state"라고 부르기도 한다.
     return {
       //logo: '원룸샵',
       //price1: 60,
@@ -64,6 +86,7 @@ export default {
       prices : ['50', '60', '70'],
       reportCnt : 0,
       reportCntArr : [0, 0, 0],
+      openModal : false,
 
     }
 
@@ -84,6 +107,19 @@ export default {
   color: #2c3e50;
 }
 
+.blackBg {
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.5);
+  position: fixed; padding: 20px;
+}
+
+.whiteBg {
+  width: 500px; height: 250px;
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+}
+
 .menu {
   background: darkslateblue;
   padding: 15px;
@@ -93,5 +129,11 @@ export default {
 .menu a {
   color: white;
   padding: 10px;
+}
+
+.roomImg {
+  width: 300px;
+  margin-top: 40px;
+
 }
 </style>
