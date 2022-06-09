@@ -24,13 +24,15 @@
     작명한 변수는 데이터안의 '자료'가 된다. -->
     <a v-for="menu in menuBar" :key="menu">{{ menu }}</a>
   </div>
+
   <div>
     원룸샵
     <hr>
-    <img src="./assets/room0.jpg" class="roomImg"/>
-    <h4 class="red" @click="openModal = true" :style="스타일">{{ products[0] }}</h4>
+    <!-- <img src="./assets/room0.jpg" class="roomImg"/> -->
+    <img :src="roomData[0].image" class="roomImg"/>
+    <h4 class="red" @click="openModal = true">{{ roomData[0].title }}</h4>
     <!-- 속성을 나타낼때는 :을 명령어 앞에 붙여 :style로 만들어준다. -->
-    <p>{{ price1 }} 만원</p>
+    <p>{{ roomData[0].price }}원</p>
     <button v-on:click = "reportCnt += 1">허위매물신고</button> <span>신고수 : {{reportCnt}}</span>
     <!-- 버튼을 눌렀을 때 자바스크립트처럼 이벤트를 타게 하려면 v-on:click=""을 사용한다.
     또는 @click=""도 vue 방식으로써 역시 가능하다.
@@ -40,16 +42,31 @@
     원래 자바스크립트 방식은 onClick="" -->
   </div>
   <div>
-    <img src="./assets/room1.jpg" class="roomImg"/>
-    <h4>{{ products[1] }}</h4>
-    <p>{{ price2 }} 만원</p>
+    <img :src="roomData[1].image" class="roomImg"/>
+    <h4>{{ roomData[1].title }}</h4>
+    <p>{{ roomData[1].price }}원</p>
     <button v-on:click = reportCntArr[1]++>허위매물신고</button> <span>신고수 : {{reportCntArr[1]}}</span>
   </div>
   <div>
-    <img src="./assets/room2.jpg" class="roomImg"/>
-    <h4>{{ products[2] }}</h4>
-    <p>{{ price2 }} 만원</p>
+    <img :src="roomData[2].image" class="roomImg"/>
+    <h4>{{ roomData[2].title }}</h4>
+    <p>{{ roomData[2].price }}원</p>
     <button v-on:click = "reportCntArr[2] += 1">허위매물신고</button> <span>신고수 : {{reportCntArr[2]}}</span>
+  </div>
+  <div>
+    <img :src="roomData[3].image" class="roomImg"/>
+    <h4>{{ roomData[3].title }}</h4>
+    <p>{{ roomData[3].price }}원</p>
+  </div>
+  <div>
+    <img :src="roomData[4].image" class="roomImg"/>
+    <h4>{{ roomData[4].title }}</h4>
+    <p>{{ roomData[4].price }}원</p>
+  </div>
+  <div>
+    <img :src="roomData[5].image" class="roomImg"/>
+    <h4>{{ roomData[5].title }}</h4>
+    <p>{{ roomData[5].price }}원</p>
   </div>
   
 
@@ -60,10 +77,17 @@
     <p>50만원</p>
   </div> -->
 
+  <!-- div 태그에 반복문을 달아 똑같이 상품목록을 만들기 -->
+  <!-- <div v-for="rooms in roomData" :key="rooms">
+    <img :src="rooms.image" class="roomImg"/>
+    <h4>{{ rooms.title }}</h4>
+    <p>{{ rooms.price }}원</p>
+  </div> -->
+
 </template>
 
 <script>
-
+import roomData from './assets/oneroom'
 
 export default {
   name: 'App',
@@ -83,6 +107,7 @@ export default {
       //스타일: 'color : blue',
       menuBar : ['Home', 'Shop', 'About'],
       products : ['역삼동원룸', '천호동원룸', '마포구원룸'],
+      roomData,
       prices : ['50', '60', '70'],
       reportCnt : 0,
       reportCntArr : [0, 0, 0],
