@@ -8,8 +8,10 @@
   -->
   <div class="blackBg" v-if="openModal == true">
     <div class="whiteBg">
-      <h4>상세페이지임</h4>
-      <p>상세페이지 내용임</p>
+      <img :src="roomData[pressId].image" style="width: 100%"/>
+      <h4>{{ roomData[pressId].title }}</h4>
+      <p>{{ roomData[pressId].content }}</p>
+      <p>{{ roomData[pressId].price }}원</p>
       <button @click="openModal = false">닫기</button>      
     </div>
   </div>
@@ -25,21 +27,34 @@
     <a v-for="menu in menuBar" :key="menu">{{ menu }}</a>
   </div>
 
-  <div>
+  <!-- <div v-for="(rooms, i) in roomData" :key="i">
+    <img :src="rooms.image" class="roomImg"/>
+    <h4 @click="openModal = true; pressId = i">{{ rooms.title }}</h4>
+    <p>{{ rooms.price }}원</p>
+  </div> -->
+
+  <div v-for="rooms in roomData" :key="rooms">
+    <img :src="rooms.image" class="roomImg"/>
+    <h4 @click="openModal = true; pressId = rooms.id">{{ rooms.title }}</h4>
+    <p>{{ rooms.price }}원</p>
+  </div>
+
+  <!--
+    <div>
     원룸샵
     <hr>
-    <!-- <img src="./assets/room0.jpg" class="roomImg"/> -->
+    <img src="./assets/room0.jpg" class="roomImg"/>
     <img :src="roomData[0].image" class="roomImg"/>
     <h4 class="red" @click="openModal = true">{{ roomData[0].title }}</h4>
-    <!-- 속성을 나타낼때는 :을 명령어 앞에 붙여 :style로 만들어준다. -->
+    속성을 나타낼때는 :을 명령어 앞에 붙여 :style로 만들어준다.
     <p>{{ roomData[0].price }}원</p>
     <button v-on:click = "reportCnt += 1">허위매물신고</button> <span>신고수 : {{reportCnt}}</span>
-    <!-- 버튼을 눌렀을 때 자바스크립트처럼 이벤트를 타게 하려면 v-on:click=""을 사용한다.
+    버튼을 눌렀을 때 자바스크립트처럼 이벤트를 타게 하려면 v-on:click=""을 사용한다.
     또는 @click=""도 vue 방식으로써 역시 가능하다.
     *** reportCnt += 1을 사용하려면 "" 안에 넣어서 "reportCnt += 1"로 하던가, 아님 reportCnt++ 로 만들어준다.
     *** 혹은 함수(function())을 사용해서 타라WMS에서 했듯이 script 부분 아랫쪽으로 보내서 길게 코딩할 수도 있다.
         함수를 써서 script 부분 아랫쪽에 보내서 함수 선언할 때는 함수안에 data{} 부분들을 가져가기 위해 this.을 사용해서 데이터명을 완성해준다.
-    원래 자바스크립트 방식은 onClick="" -->
+    원래 자바스크립트 방식은 onClick=""
   </div>
   <div>
     <img :src="roomData[1].image" class="roomImg"/>
@@ -67,7 +82,7 @@
     <img :src="roomData[5].image" class="roomImg"/>
     <h4>{{ roomData[5].title }}</h4>
     <p>{{ roomData[5].price }}원</p>
-  </div>
+  </div> -->
   
 
   <!--  div 태그에 반복문을 달아 똑같이 반복 제목을 만들기
@@ -82,7 +97,8 @@
     <img :src="rooms.image" class="roomImg"/>
     <h4>{{ rooms.title }}</h4>
     <p>{{ rooms.price }}원</p>
-  </div> -->
+  </div>
+  -->
 
 </template>
 
@@ -112,6 +128,7 @@ export default {
       reportCnt : 0,
       reportCntArr : [0, 0, 0],
       openModal : false,
+      pressId : 0
 
     }
 
@@ -139,7 +156,7 @@ export default {
 }
 
 .whiteBg {
-  width: 500px; height: 250px;
+  width: 500px; height: 420px;
   background: white;
   border-radius: 8px;
   padding: 20px;
