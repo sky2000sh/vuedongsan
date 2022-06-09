@@ -6,7 +6,7 @@
 
     v-if="조건식" => 조건식이 참일때만 HTML을 보여준다.
   -->
-  <div class="blackBg" v-if="openModal == true">
+  <!-- <div class="blackBg" v-if="openModal == true">
     <div class="whiteBg">
       <img :src="roomData[pressId].image" style="width: 100%"/>
       <h4>{{ roomData[pressId].title }}</h4>
@@ -14,7 +14,8 @@
       <p>{{ roomData[pressId].price }}원</p>
       <button @click="openModal = false">닫기</button>      
     </div>
-  </div>
+  </div> -->
+  <Modal/>
 
 
 
@@ -26,6 +27,14 @@
     작명한 변수는 데이터안의 '자료'가 된다. -->
     <a v-for="menu in menuBar" :key="menu">{{ menu }}</a>
   </div>
+
+  <Discount/>
+  <!-- 컴포넌트 만드는 순서
+  1. 사용할 컴포넌트를 생성해서 그 vue파일을 import하고
+  2. 등록하고
+  3. 사용한다. 
+  *** 초보들의 특징이 온갖거 다 컴포넌트로 만들어두기 때문에 그러지말고, 반복적으로 출현할 부분만 컴포넌트화 할것을 권장.
+  -->
 
   <!-- <div v-for="(rooms, i) in roomData" :key="i">
     <img :src="rooms.image" class="roomImg"/>
@@ -104,10 +113,16 @@
 
 <script>
 import roomData from './assets/oneroom'
+// import discount from './components/Discount.vue'
+import Discount from './components/Discount.vue'
+import Modal from './components/Modal.vue'
 
 export default {
   name: 'App',
   components: {
+    //Discount : discount
+    Discount,
+    Modal
 
   },
   // data라는 데이터 보관함이 있어야 한다.
@@ -149,17 +164,12 @@ export default {
   color: #2c3e50;
 }
 
-.blackBg {
-  width: 100%; height: 100%;
-  background: rgba(0,0,0,0.5);
-  position: fixed; padding: 20px;
+body {
+  margin: 0;
 }
 
-.whiteBg {
-  width: 500px; height: 420px;
-  background: white;
-  border-radius: 8px;
-  padding: 20px;
+div {
+  box-sizing: border-box;
 }
 
 .menu {
@@ -176,6 +186,6 @@ export default {
 .roomImg {
   width: 300px;
   margin-top: 40px;
-
 }
+
 </style>
