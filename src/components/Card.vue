@@ -15,6 +15,8 @@ export default {
         roomData: Object, // 데이터의 자료형 형식 ( Object, Array, String, Number, Boolean etc etc)
         pressId: Number,
         openModal: Boolean,
+        roomObj: Object,
+
 
     },
 

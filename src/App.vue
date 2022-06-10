@@ -22,6 +22,10 @@
   3. 자식 component에서 이들을 사용한다.
   *** 그럼 애초에 자식.vue 컴포넌트에 데이터를 생성해서 사용하면 되지 않을까 싶지만,
   이는 가능하지만 부모 컴포넌트에도 쓰는 데이터라면 부모 컴포넌트에 생성하는게 좀 더 올바르다.
+
+  아래 data인 Object 형태인 roomObj에 있는 name, quanity, quanlity를
+  roomObj.name / roomObj.quanity / roomObj.quanlity 형식으로 각각 props로 전송하려면
+  v-bind="Object 데이터이름" 으로 만들어주고 똑같이 2번과 3번을 수행한다.
   -->
 
 
@@ -55,7 +59,10 @@
     <p>{{ rooms.price }}원</p>
   </div> -->
 
-  <Card :roomData="roomData" :pressId="pressId" :openModal="openModal"/>
+  <!-- <Card :roomData="roomData[i]" v-for="(rooms, i) in roomData" :key="rooms"/> -->
+
+  <Card :roomData="roomData" :pressId="pressId" :openModal="openModal"
+        v-bind="roomObj"/>
 
   <!--
     <div>
@@ -154,7 +161,12 @@ export default {
       reportCnt : 0,
       reportCntArr : [0, 0, 0],
       openModal : false,
-      pressId : 0
+      pressId : 0,
+      roomObj : {
+        name: '',
+        quantity: '',
+        quanlity: '',
+      },
 
     }
 
