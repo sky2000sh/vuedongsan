@@ -15,7 +15,7 @@
       <button @click="openModal = false">닫기</button>      
     </div>
   </div> -->
-  <Modal :roomData="roomData" :pressId="pressId" :openModal="openModal"/>
+  <Modal @openModal="openModal = false" :roomData="roomData" :pressId="pressId" :openModal="openModal"/>
   <!-- props로 자식에게 데이터 보내는 법
   1. 데이터 보내고 :roomData="roomData" 이때 :roomData는 맘대로 작명가능 / "roomData"는 data의 실제 데이터이름
   2. 자식 component에 등록하고
@@ -61,7 +61,10 @@
 
   <!-- <Card :roomData="roomData[i]" v-for="(rooms, i) in roomData" :key="rooms"/> -->
 
-  <Card :roomData="roomData" :pressId="pressId" :openModal="openModal"
+  <!-- Card.vue => 부모에게 메시지를 보낼 때는, $emit('작명', 데이터) ex) $emit('openModal', true) / $emit('openModal', null) / $emit('openModal') -->
+  <!-- 그 후, App.vue => Card 컴포넌트에 @보내서 받은 작명="javascript 표기"
+      ex) @openModal="openModal = true" -->
+  <Card @openModal="openModal = true; pressId = $event" :roomData="roomData" :pressId="pressId" :openModal="openModal"
         v-bind="roomObj"/>
 
   <!--

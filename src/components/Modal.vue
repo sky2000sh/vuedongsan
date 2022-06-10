@@ -5,7 +5,8 @@
       <h4>{{ roomData[pressId].title }}</h4>
       <p>{{ roomData[pressId].content }}</p>
       <p>{{ roomData[pressId].price }}원</p>
-      <!-- <button @click="openModal = false">닫기</button>       -->
+      <!-- <button @click="openModal = false">닫기</button> -->
+      <button @click="$emit('openModal')">닫기</button>
     </div>
   </div>
 </template>
