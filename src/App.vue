@@ -15,7 +15,14 @@
       <button @click="openModal = false">닫기</button>      
     </div>
   </div> -->
-  <Modal/>
+  <Modal :roomData="roomData" :pressId="pressId" :openModal="openModal"/>
+  <!-- props로 자식에게 데이터 보내는 법
+  1. 데이터 보내고 :roomData="roomData" 이때 :roomData는 맘대로 작명가능 / "roomData"는 data의 실제 데이터이름
+  2. 자식 component에 등록하고
+  3. 자식 component에서 이들을 사용한다.
+  *** 그럼 애초에 자식.vue 컴포넌트에 데이터를 생성해서 사용하면 되지 않을까 싶지만,
+  이는 가능하지만 부모 컴포넌트에도 쓰는 데이터라면 부모 컴포넌트에 생성하는게 좀 더 올바르다.
+  -->
 
 
 
