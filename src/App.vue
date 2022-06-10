@@ -49,11 +49,13 @@
     <p>{{ rooms.price }}원</p>
   </div> -->
 
-  <div v-for="rooms in roomData" :key="rooms">
+  <!-- <div v-for="rooms in roomData" :key="rooms">
     <img :src="rooms.image" class="roomImg"/>
     <h4 @click="openModal = true; pressId = rooms.id">{{ rooms.title }}</h4>
     <p>{{ rooms.price }}원</p>
-  </div>
+  </div> -->
+
+  <Card :roomData="roomData" :pressId="pressId" :openModal="openModal"/>
 
   <!--
     <div>
@@ -123,13 +125,15 @@ import roomData from './assets/oneroom'
 // import discount from './components/Discount.vue'
 import Discount from './components/Discount.vue'
 import Modal from './components/Modal.vue'
+import Card from './components/Card.vue'
 
 export default {
   name: 'App',
   components: {
     //Discount : discount
     Discount,
-    Modal
+    Modal,
+    Card,
 
   },
   // data라는 데이터 보관함이 있어야 한다.
