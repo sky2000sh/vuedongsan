@@ -15,7 +15,27 @@
       <button @click="openModal = false">닫기</button>      
     </div>
   </div> -->
-  <Modal @openModal="openModal = false" :roomData="roomData" :pressId="pressId" :openModal="openModal"/>
+  <transition name="fade">
+  <!-- CSS로 애니메이션 주기 2번째는, vue의 transition 태그를 사용하기
+  1. 애니메이션 주고싶은 요소를 <transition>으로 감싸기
+  2. 아래 style의 다음 클래스명 3개가 있어야한다.
+      fade-enter-from / fade-enter-active / fade-enter-to
+      이 때, name이 fade이기 때문에 각 3개의 이름 시작이 fade인것이지, fade 이름은 작명이 가능하다.
+      즉, name 명 따라서 변경이 가능하다.
+  3. 
+
+  -->
+  <!-- <div class="startModal" :class="{ endModal: openModal }"> -->
+    <!-- CSS로 애니메이션 주려면
+    1. 시작전 class 명 => startModal
+    2. 애니메이션 끝난 후 class 명 => endModal
+    3. 그리고 원할 때 2번 class명 부착
+    *** endModal가 실행될 때 style .endModal이 실행되기 때문에,
+    openModal이 true일 때만 .endModal이 실행되도록 만든다.
+    -->
+    <Modal @openModal="openModal = false" :roomData="roomData" :pressId="pressId" :openModal="openModal"/>
+  <!-- </div> -->
+  </transition>
   <!-- props로 자식에게 데이터 보내는 법
   1. 데이터 보내고 :roomData="roomData" 이때 :roomData는 맘대로 작명가능 / "roomData"는 data의 실제 데이터이름
   2. 자식 component에 등록하고
@@ -212,6 +232,47 @@ div {
 .roomImg {
   width: 300px;
   margin-top: 40px;
+}
+
+.startModal {
+  opacity: 0;
+  transition: all 1s;
+}
+
+.endModal {
+  opacity: 1;
+}
+
+/* 입장 애니메이션 */
+.fade-enter-from {
+  /* 시작 시 스타일 */
+  opacity: 0;
+}
+
+.fade-enter-active {
+  transition: all 1s;
+}
+
+.fade-enter-to {
+  /* 끝날 시 스타일 */
+  opacity: 1;
+}
+
+/* 퇴장 애니메이션 */
+.fade-leave-from {
+  /* Y축으로 솟구치게 한다. 즉, 위로 올라가게 한다. */
+  transform: translateY(-1000px);   
+  /* 시작 시 스타일 */
+  /* opacity: 0; */
+}
+
+.fade-leave-active {
+  transition: all 1s;
+}
+
+.fade-leave-to {
+  /* 끝날 시 스타일 */
+  opacity: 1;
 }
 
 </style>
