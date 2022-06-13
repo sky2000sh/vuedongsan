@@ -4,7 +4,7 @@
   2. 등록하고
   3. 사용한다. -->
   <div class="discount">
-    <h4>지금 결제하면 20% 할인</h4> 
+    <h4>지금 결제하면 {{countNumber}}% 할인</h4> 
   </div>
 </template>
 
@@ -12,6 +12,28 @@
 export default {
     // eslint-disable-next-line vue/multi-word-component-names
     name: 'Discount',
+
+    mounted() {
+    setInterval(() => {
+      this.countNumber--
+
+      if(Number(this.countNumber) === 0) {
+        return 0
+      }
+
+      
+    }, 1000)
+
+    // clearTimeout(() => {
+    //   Number(this.countNumber) === 0
+    // })
+  },
+
+    data() {
+      return {
+        countNumber: 30
+      }
+    }
 
 }
 </script>

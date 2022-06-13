@@ -59,8 +59,13 @@ export default {
           alert('숫자만 입력가능합니다.')
         }        
       },
+    },
 
-    }
+    // beforeUpdate() {
+    //   if(this.month <= 2) {
+    //     alert('최소 3개월 이상 가능합니다.')
+    //   }
+    // },
 
 }
 </script>

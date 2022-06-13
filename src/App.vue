@@ -59,6 +59,7 @@
     <a v-for="menu in menuBar" :key="menu">{{ menu }}</a>
   </div>
 
+  <!-- <Discount v-if="showDiscount === true"/> -->
   <Discount/>
   <!-- 컴포넌트 만드는 순서
   1. 사용할 컴포넌트를 생성해서 그 vue파일을 import하고
@@ -69,7 +70,6 @@
 
   <button @click="priceSort">가격순 정렬</button>
   <button @click="priceResort">가격역순 정렬</button>
-  <button @click="titleSort">가나다 정렬</button>
   <button @click="sortBack">되돌리기</button>
 
   <!-- <div v-for="(rooms, i) in roomData" :key="i">
@@ -196,8 +196,27 @@ export default {
         quantity: '',
         quanlity: '',
       },
+      showDiscount: true,
+      Discount,
 
     }
+
+  },
+
+  created() {
+
+  },
+
+  beforeMounted() {
+
+  },
+
+  mounted() {
+    // mounted에서 this를 쓸 일이 있다면 ()=> arrow함수를 잘 사용하도록 하자
+    // 밖에서 mounted안으로 끌어다 쓰겠다라는 공식 함수이기 때문에.
+    setTimeout(() => {
+      this.showDiscount = false
+    }, 2000)
 
   },
 
@@ -229,7 +248,7 @@ export default {
 
       // 깊은 복사
       // this.roomDataCopy = Object.assign({}, roomData);
-    }
+    },
     
   },
 }
