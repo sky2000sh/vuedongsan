@@ -67,6 +67,11 @@
   *** 초보들의 특징이 온갖거 다 컴포넌트로 만들어두기 때문에 그러지말고, 반복적으로 출현할 부분만 컴포넌트화 할것을 권장.
   -->
 
+  <button @click="priceSort">가격순 정렬</button>
+  <button @click="priceResort">가격역순 정렬</button>
+  <button @click="titleSort">가나다 정렬</button>
+  <button @click="sortBack">되돌리기</button>
+
   <!-- <div v-for="(rooms, i) in roomData" :key="i">
     <img :src="rooms.image" class="roomImg"/>
     <h4 @click="openModal = true; pressId = i">{{ rooms.title }}</h4>
@@ -180,6 +185,7 @@ export default {
       menuBar : ['Home', 'Shop', 'About'],
       products : ['역삼동원룸', '천호동원룸', '마포구원룸'],
       roomData,
+      roomDataCopy: '',
       prices : ['50', '60', '70'],
       reportCnt : 0,
       reportCntArr : [0, 0, 0],
@@ -196,6 +202,34 @@ export default {
   },
 
   methods: {
+
+    priceSort() {
+      // .sort() => 객체.sort()를 사용하면 객체의 오름순으로 정렬이 된다.
+      this.roomData.sort(function(a, b) {
+        return a.price - b.price
+      })
+    },
+
+    priceResort() {
+      this.roomData.sort(function(a, b) {
+        return b.price - a.price
+      })
+    },
+
+    titleSort() {
+      this.roomData.sort(function(a, b) {
+        return a.title - b.title
+      })
+    },
+
+    sortBack() {
+      // array / Object 데이터의 각각 별개의 사본을 만들려면 [...array자료] 라고 입력한다.
+      this.roomDataCopy = [...roomData]
+      this.roomData = [...this.roomDataCopy]
+
+      // 깊은 복사
+      // this.roomDataCopy = Object.assign({}, roomData);
+    }
     
   },
 }
